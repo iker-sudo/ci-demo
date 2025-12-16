@@ -2,17 +2,17 @@
 
 [![CI Pipeline](https://github.com/iker-sudo/ci-demo/actions/workflows/ci.yml/badge.svg)](https://github.com/iker-sudo/ci-demo/actions)
 
-## 📋 Descripción
+## Descripción
 
 Proyecto educativo de **Integración Continua (CI)** con Spring Boot 3.4 y GitHub Actions. Demuestra:
 
-- ✅ Creación de un proyecto Spring Boot con Maven
-- ✅ Desarrollo de controladores REST
-- ✅ Tests unitarios con JUnit 5
-- ✅ Pipeline automático de CI/CD con GitHub Actions
-- ✅ Empaquetado y distribución de artefactos
+-  Creación de un proyecto Spring Boot con Maven
+-  Desarrollo de controladores REST
+-  Tests unitarios con JUnit 5
+-  Pipeline automático de CI/CD con GitHub Actions
+-  Empaquetado y distribución de artefactos
 
-## 🛠 Tecnologías
+## Tecnologías
 
 - **Spring Boot** 3.4.0
 - **Java** 21
@@ -21,7 +21,7 @@ Proyecto educativo de **Integración Continua (CI)** con Spring Boot 3.4 y GitHu
 - **GitHub Actions** (CI/CD)
 - **MockMvc** (testing de controladores)
 
-## 📁 Estructura del Proyecto
+## Estructura del Proyecto
 
 ```
 ci-demo/
@@ -45,7 +45,7 @@ ci-demo/
 └── README.md
 ```
 
-## 🚀 Endpoints REST
+## Endpoints REST
 
 ### GET /hello
 ```bash
@@ -88,7 +88,7 @@ curl http://localhost:8080/info
 }
 ```
 
-## 🧪 Tests
+## Tests
 
 Los tests verifican que cada endpoint:
 1. Devuelve status HTTP 200
@@ -107,7 +107,7 @@ mvn test
 mvn test -Dtest=GreetingControllerTest#testHelloEndpoint
 ```
 
-## 🔧 Compilación y Ejecución Local
+## Compilación y Ejecución Local
 
 ### Prerequisitos
 
@@ -171,10 +171,10 @@ En GitHub:
 
 | Estado | Significado |
 |--------|-------------|
-| 🟢 Verde | Todos los tests pasaron, JAR generado |
-| 🔴 Rojo | Error en compilación o tests fallaron |
-| 🟡 Amarillo | Pipeline en ejecución |
-| ⚪ Gris | Pipeline nunca ejecutado |
+| Verde | Todos los tests pasaron, JAR generado |
+| Rojo | Error en compilación o tests fallaron |
+| Amarillo | Pipeline en ejecución |
+| Gris | Pipeline nunca ejecutado |
 
 ## 🐛 Debugging
 
@@ -197,7 +197,7 @@ En GitHub:
 2. Recuerda: **solo espacios**, nunca tabs
 3. La indentación es crítica en YAML
 
-## 📚 Recursos
+## Recursos
 
 - [Spring Boot Documentation](https://spring.io/projects/spring-boot)
 - [GitHub Actions Documentation](https://docs.github.com/en/actions)
