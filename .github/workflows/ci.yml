@@ -72,7 +72,7 @@ jobs:
       - name: Build summary
         if: success()
         run: |
-          echo "✅ Build exitoso!"
-          echo "📦 JAR generado: target/ci-demo-1.0.0.jar"
-          echo "🧪 Tests ejecutados correctamente"
+          echo " Build exitoso!"
+          echo " JAR generado: target/ci-demo-1.0.0.jar"
+          echo " Tests ejecutados correctamente"
           ls -lh target/ci-demo-*.jar
