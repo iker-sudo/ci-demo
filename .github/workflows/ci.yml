@@ -1,0 +1,78 @@
+# GitHub Actions CI Pipeline for Spring Boot Application
+# =====================================================
+# Este workflow ejecuta:
+# 1. Validación de código (compilación)
+# 2. Ejecución de tests JUnit
+# 3. Empaquetado en JAR
+# 4. Carga de artefactos
+
+name: CI Pipeline
+
+on:
+  # Triggers
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    # Información del contexto
+    # En logs veremos detalles de la ejecución
+
+    steps:
+      # Paso 1: Descargar código del repositorio
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      # Paso 2: Configurar Java 21 (versión requerida)
+      # cache: maven -> reutiliza dependencias descargadas
+      - name: Set up Java 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'  # Distribución de OpenJDK recomendada
+          cache: maven             # Cachea ~/.m2/repository
+      
+      # Paso 3: Compilar el proyecto
+      # clean: elimina compilaciones previas
+      # compile: valida el código y genera .class
+      - name: Build with Maven
+        run: mvn -B clean compile --file pom.xml
+        # -B = batch mode (sin interacción)
+        # --file pom.xml = especifica ubicación de pom
+      
+      # Paso 4: Ejecutar tests JUnit
+      # El test falla si algún @Test no pasa
+      - name: Run tests
+        run: mvn -B test --file pom.xml
+      
+      # Paso 5: Empaquetar la aplicación en JAR
+      # -DskipTests = no ejecuta tests nuevamente
+      # -B = batch mode
+      - name: Package with Maven
+        run: mvn -B package -DskipTests --file pom.xml
+      
+      # Paso 6: Cargar JAR como artefacto
+      # Permite descargar el .jar desde GitHub Actions
+      # name: identificador del artefacto
+      # path: ruta de los archivos a subir
+      # retention-days: cuánto tiempo guardar el artefacto
+      - name: Upload JAR artifact
+        uses: actions/upload-artifact@v4
+        if: always()  # Sube incluso si el build falló (para debuggear)
+        with:
+          name: ci-demo-jar
+          path: target/ci-demo-*.jar
+          retention-days: 30
+      
+      # Paso 7: Información del resultado (opcional pero útil)
+      - name: Build summary
+        if: success()
+        run: |
+          echo "✅ Build exitoso!"
+          echo "📦 JAR generado: target/ci-demo-1.0.0.jar"
+          echo "🧪 Tests ejecutados correctamente"
+          ls -lh target/ci-demo-*.jar
